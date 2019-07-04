@@ -10,17 +10,20 @@ type Props = {
     link: string,
     title: string,
     description: string,
-    promocode: string
+    promocode: string,
+    bonus: boolean
   },
   onClick: function,
+  bonusActive: function,
   language: {
     promocode: string,
-    activate_bonus: string
+    activate_bonus: string,
+    bonus_active: string
   }
 };
 
 function ServiceItem(props: Props) {
-  const { service, language } = props;
+  const { service, language, bonusActive } = props;
   return (
     <div className={css.serviceItem}>
       <div>
@@ -53,7 +56,21 @@ function ServiceItem(props: Props) {
       </div>
       <div className={css.bonus}>
         {
-          <input type='button' value={language.activate_bonus}></input>
+          service.bonus ?
+            <input
+              type='button'
+              value={language.bonus_active}
+              style={{ background: "green" }}
+            >
+            </input>
+            :
+            <input
+              type='button'
+              value={language.activate_bonus}
+              onClick={() => { bonusActive(service.title) }}
+            >
+            </input>
+
         }
       </div>
     </div>

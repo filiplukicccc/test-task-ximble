@@ -4,17 +4,19 @@ import ServiceItem from './ServiceItem';
 import composedLanguageWrap from '../hoc/LanguageWrap';
 import { connect } from 'react-redux';
 import css from '../../style/index.css';
-import { servicesFetchRequested } from '../../actions/services';
+import { servicesFetchRequested, bonusActive } from '../../actions/services';
 
 type Props = {
   services: Array<any>,
   servicesFetchRequested: function,
+  bonusActive: function,
   language: {
     services: string,
     filter: string,
     reset: string,
     promocode: string,
-    activate_bonus: string
+    activate_bonus: string,
+    bonus_active: string
   }
 };
 type State = {
@@ -25,7 +27,8 @@ class Services extends Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      service: ''
+      service: '',
+      aaa: []
     }
   }
   componentDidMount() {
@@ -42,7 +45,7 @@ class Services extends Component<Props, State> {
     })
   }
   render() {
-    const { services, language } = this.props;
+    const { services, language, bonusActive } = this.props;
     const { service } = this.state;
     let serviceItem;
     services ? serviceItem = services
@@ -55,6 +58,7 @@ class Services extends Component<Props, State> {
             key={i}
             service={service}
             language={language}
+            bonusActive={bonusActive}
           />
         )
       }) : serviceItem = null;
@@ -78,4 +82,4 @@ const mapStateToProps = (state) => ({
   services: state.services.bonuses
 });
 
-export default connect(mapStateToProps, { servicesFetchRequested })(composedLanguageWrap(Services));
+export default connect(mapStateToProps, { servicesFetchRequested, bonusActive })(composedLanguageWrap(Services));
