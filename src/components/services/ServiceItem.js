@@ -40,6 +40,7 @@ function ServiceItem(props: Props) {
           <input
             style={{ border: 'none', zIndex: "0" }}
             value={service.promocode}
+            readOnly
           />
           <CopyToClipboard text={service.promocode}>
             <img

@@ -52,6 +52,7 @@ class Services extends Component<Props, State> {
       .map((service, i) => {
         return (
           <ServiceItem
+            key={i}
             service={service}
             language={language}
           />
